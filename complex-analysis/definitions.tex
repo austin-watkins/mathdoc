@@ -244,6 +244,28 @@ Use this a s a basic tool to estimate the size of integrals.
   A homotopy \(H : [0, 1] \times [0, 1] \to G\) is called smooth if the intermediate curves \(\gamma_s(t)\) are piecewise \(C^1\) functions of \(t\) for each \(s\) and the cross curves \(\lambda_t(s)\) are piecewise \(C^1\) functions of \(s\) for each \(t\). 
 \end{definition}
 
+\section{Cauchy's Integral Formula}
+
+\begin{definition}[Index of a curve]
+Let \(\gamma \) be a closed curve in \(\C\) and \(z_0 \in \C\) be a point not on \(\gamma\). 
+Then the index of \(\gamma\) with respect to \(z_0\) is defined by 
+\[I(\gamma; z_0) = \frac{1}{2 \pi i} \int_\gamma \frac{dz}{z - z_0} \].
+
+\paragraph{Also called}
+\begin{itemize}
+  \item Winding number of \(\gamma\)
+  \item say \(\gamma \) winds around \(z_0\), \(I(\gamma, z_0) \) times. 
+\end{itemize}
+
+\paragraph{Used to}
+Can be used to formalize inside and outside a curve. This can also be done by Jordan Curve Theorem (a topological result).
+
+\paragraph{Note}
+The index is a continuous function of \(z\) as long as \(z\) does not cross \(\gamma\)
+
+\end{definition}
+
+
 
 \end{document}
 
