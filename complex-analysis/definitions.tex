@@ -1,0 +1,426 @@
+%        File: notes.tex
+%     Created: Thu Sep 24 12:00 PM 2020 M
+% Last Change: Thu Sep 24 12:00 PM 2020 M
+%
+\documentclass[a4paper]{article}
+
+\usepackage{amsfonts}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Cauchy's Theorem}
+
+\subsection{Contour Integrals}
+
+\subsubsection{Definitions}
+\begin{definition}[Integral of a curve in $\C$]
+  \[
+    \int^b_a h(t) dt = \int^b_a u(t) dt + i \int^b_a v(t) dt
+  \]
+  Where \(h: [a, b] \subset \R \to \C \)
+
+
+\end{definition}
+
+
+\begin{definition}[continuous curve or contour in $\C$]
+  A continuous map \(\gamma : [a, b] \to \C\).
+\end{definition}
+
+\begin{definition}[piecewise $C^1$ curve]
+  A curve whose interval $[a, b]$ we can divide up $a = a_0 < a_1 <  \ldots < a_n = b$ such that the derivative $\gamma'(t)$ exists on each open subinterval $(a_i, a_{a + 1})$ and is continuous on $[a_i, a_{i + 1}]$, where continuous on $[a_i, a_{i + 1}]$ means $\lim_{t \to a_i^+} \gamma'(t)$ and $\lim_{t \to a_{i+1^-}} \gamma'(t)$ exist.
+\end{definition}
+
+\begin{definition}[Integral of $f$ along $\gamma$]
+  \[
+    \int_\gamma f = \int_\gamma f(z) dz = \sum^{n - 1}_{i = o} \int^{a+1}_{a_i} f(\gamma(t))\gamma'(t) dt
+  \]
+  Where $f$ is a continuous and defined on an open set $A \subset \C$ and that $\gamma: [a, b] \to \C$ is a piecewise smooth curve satisfying $\gamma([a, b]) \subset A$.\\
+
+  \paragraph{Relation to line integrals in a vector field}
+  The definition is analogous to the following definition of a line integral from vector calculus. Let $P(x, y)$ and $Q(x, y)$ be  real-valued functions from $x$ to $y$ and let $\gamma$ be a curve.
+  \[
+    \int_\gamma P(x, y) dx + Q(x, y) dy = \sum^{n- 1}_{i = 0} \int^{a_{i+1}}_{a_i} [P(x(t), y(t)) \frac{dx}{dt} + Q(x(t), y(t)) \frac{dy}{dt}] dt
+  \]
+  where $\gamma(t) = (x(t), y(t))$.
+\end{definition}
+
+\begin{theorem}[Integral of $f$ along $\gamma$ in terms of $u$ and $v$]
+  \[
+  \int_\gamma f = \int_\gamma [u(x, y) dx - v(x, y)dy] + i \int_\gamma [u(x, y)dy + v(x, y)dx]
+  \]
+  \paragraph{How to remember}
+  \[f(z) dz = (u + iv)(dx + i dy) = u dx - v dy + i(v dx + u dy)\]
+
+\end{theorem}
+
+\begin{definition}[Opposite curve $-\gamma$]
+  \[
+    - \gamma : [a , b] \to \C
+  \]
+  \paragraph{Relation to $\gamma$}
+  $(- \gamma)(t) = \gamma(a + b - t)$.
+
+  \paragraph{Geometric Intuition}
+  $- \gamma $ is $- \gamma$ traversed in the opposite sense. 
+\end{definition}
+
+\begin{definition}[join or sum or union of $\gamma_1 + \gamma_2$ ]
+  Suppose that $\gamma_1 : [a, b] \to \C$ and that $\gamma_2: [b, c] \to \C$ with $\gamma_1(b) = \gamma_2(b)$. 
+  Define $\gamma_1 + \gamma_2 : [a, c] \to \C$ as 
+  \[ (\gamma_1 + \gamma_2)(t) = \begin{cases} 
+      \gamma_1(t) & \text{ if } t \in [a, b] \\ 
+      \gamma_2(t) & \text{ if } t \in [b, c] \\ 
+   \end{cases}
+\]
+
+  Where $\gamma_1$ and $\gamma_2$ are two curves. 
+\end{definition}
+
+
+
+\begin{theorem}[Integration properties of curves]
+  \[
+    \int_\gamma (c_1 f + c_2 g) = c_1 \int_\gamma f + c_2 \int_\gamma g
+  \]
+
+  \[
+    \int_{-\gamma} f = - \int_\gamma f
+  \]
+
+  \[
+    \int_{\gamma_1 + \gamma_2} f = \int_{\gamma_1} f + \int_{\gamma_2} f 
+  \]
+
+  Where $f, g$ are continuous functions, $c_1, c_2$ are complex constants, and $\gamma, \gamma_1, \gamma_2$ piecewise $C^1$ curves. 
+\end{theorem}
+
+
+\begin{definition}[Reparametrization]
+  Let $\gamma : [a, b] \to \C$ be a piecewise smooth curve.
+  A  piecewise smooth curve $\bar{\gamma}: [\bar{a}, \bar{b}] \to \C$ is called a reparametrization of $\gamma$ if there is some $C^1$ function $\alpha: [a, b] \to [\bar{a}, \bar{b}]$ with $\alpha'(a) = \bar{a}$ and $\alpha(b) = \bar{b}$ such that $\gamma(t) = \hat{\gamma}(\alpha(t))$
+  \paragraph{Additional conditions}
+  If $\gamma'(t) > 0 $ (hence increasing), $\gamma(a) = \bar{a}$, and $\alpha(b) = \bar{b}$ imply that $\bar{\gamma}$
+  traverses the curve in the same sense that $\gamma$ does. This is sufficient and necessary to represent the same geometric curve.
+
+  \paragraph{Non-differentiable points are maintained}
+  The points in $[\bar{a}, \bar{b}]$ at which $\bar{\gamma}'$ does not exist correspond under $\alpha$ to the points of $[a, b]$ at which $\gamma'$ does not exist.
+\end{definition}
+
+\begin{theorem}[The Integral of $f$ is maintained over reparameterizations]
+  If $\bar{\gamma}$  is a reparametrization  of $\gamma$, then 
+  \[
+    \int_\gamma f = \int_{\bar{\gamma}} f
+  \]
+  for any continuous $f$ defined on an open set contining the image of $\gamma = $ image of $\bar{\gamma}$.
+\end{theorem}
+
+\begin{definition}[Arc length of a curve ]
+  \(\gamma : [a, b] \to \C\)
+  \[
+    l(\gamma) = \int_a^b|\gamma'(t)| dt = \int^b_a \sqrt{x'(t)^2 + y'(t)^2}dt
+  \]
+
+  \paragraph{Arc length is independent of parameterization}
+  Geometrically similar to reparameterization. 
+
+\end{definition}
+
+
+\begin{definition}[Curve equalities and inequalities]
+  Let $f$ be continuous on an open set $A$ and let $\gamma$ be a piecewise $C^1$ curve in $A$. If there is some constant $M \geq 0$ such that $|f(z)| \leq M$ for all points $z$ on $\gamma$ (that is, for all $z$ of the form $\gamma(t)$ for some $t$), then
+  \[
+    |\int_\gamma f| \leq M l(\gamma)
+  \]
+
+  \[
+    |\int_\gamma f| \leq \int_\gamma |f| |dz|
+  \]
+
+  Where
+  \[
+    \int_\gamma |f| |dz| = \int_a^b |f(\gamma(t))|| \gamma'(t)| dt
+  \]
+\end{definition}
+\paragraph{Usage}
+Use this a s a basic tool to estimate the size of integrals. 
+
+
+\begin{theorem}[Fundamental Theorem of Calculus - Contour Integrals]
+  Suppose that $\gamma : [0, 1] \to \C$ is a piecewise smooth curve and that $F$ is a function defined and analytic on an open set $G$ containing $\gamma$. Assume $F'$ is continuous (later we find this is redundant). Then 
+  \[
+    \int_\gamma F'(z) dz = F(\gamma(1)) - F(\gamma(0)).
+  \]
+  In particular, if $\gamma(0) - \gamma(1)$, then 
+  \[
+    \int F'(z)dz = 0.
+  \]
+\end{theorem}
+
+\begin{theorem}[Connection between zero derivative and constant]
+If $f$ is a function defined and analytic on an open connected set $G \subset \C$, and if $f'(z) = 0$ for every point $z$ in $G$, then $f$ is constant on $G$. 
+\end{theorem}
+
+
+\begin{theorem}[Path Independence Theorem]
+  Suppose $f$ is a continuous function on an open connected set $G \subset \C$.
+  Then the following are equivalent: 
+  \begin{itemize}
+    \item Integrals are path-independent: If $z_0$ and $z_1$ are any two points in $G$ and $\gamma_0$ and $\gamma_1$ are paths in $G$ from $z_0$ to $z_1$, then 
+      \[
+        \int_{\gamma_0} f(z) dz = \int_{\gamma_2} f(z) dz.
+      \]
+    \item Integrals around closed curves are 0: If $\Gamma$ is a closed curve (loop) laying in $G$, then $\int_\Gamma f(z) dz = 0$.
+    \item There is a (global) antiderivatve for $f$ on $G$: there is a function $F$ defined and analytic on all of $G$ such that $F'(z) = f(z)$ for all $z$ in $G$. 
+  \end{itemize}
+\end{theorem}
+
+\begin{definition}[Conservative]
+  A force field is called conservative if the net work done along a closed path is always $0$ or equivalently if the work done between two points is independent of the path taken between those points. 
+\end{definition}
+
+\begin{definition}[Potential Energy]
+  If the force field is conservative, then the integral defines the potential energy, whose gradient is the original force field. 
+\end{definition}
+
+\subsection{Cauchy's Theorem - A First Look}
+\begin{definition}[a simple closed curve]
+  A curve is simple if it intersects itself only at its endpoints. 
+\end{definition}
+
+\begin{theorem}[Green's Theorem]
+  For continuously differentiable functions \(P(x, y)\) and \(Q(x, y)\), 
+  \[
+    \int_\gamma P(x, y) dx + Q(x, y) dy = \int \int_A [\frac{\partial Q}{\partial x}(x, y) - \frac{\partial P}{\partial y}(x, y)] dx dy
+    \]
+  \paragraph{Used for}
+    \begin{itemize}
+      \item Making precise notions like the inside of curves clear. 
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Preliminary Version of Cauchy's Theorem]
+  Suppose that \(f\) is analytic, with derivative \(f\) continuous on and inside a simple closed curve \(\gamma\). 
+  Then
+  \[
+    \int_\gamma f = 0
+    \]
+\end{theorem}
+
+\begin{theorem}[Preliminary Version of the Deformation Theorem]
+  Let \(f\) be analytic on a region \(A\) and let \(\gamma\) be a simple closed curve in \(A\). 
+  Suppose that \(\gamma\) can be continuously deformed to another simple closed curve \(\bar{}\gamma\) without passing outside of the region \(A\) Then
+  \[
+    \int_\gamma f = \int_{\bar{\gamma}} f.
+  \]
+  \paragraph{Used for}
+    \begin{itemize}
+      \item To study curves over functions with a singularity inside of the curves.
+       We can deform the curve to one that might be easier to evaluate. 
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}[Simply Connected]
+  A region \(A \subset \C\) is called simply connected if \(A\) is connect and every closed curve \(\gamma\) in \(A\) can be deformed in \(A\) to some constant curve \(\bar{\gamma(t)} = z_0 \in A\). 
+  
+  \paragraph{}{Geometrically}
+  \begin{itemize}
+    \item A region without holes. 
+  \end{itemize}
+
+\end{definition}
+
+\begin{definition}[Homotopic to a point or contractable to a point]
+  Curves inside of a simply connect set. 
+
+  \paragraph{}{Geometrically}
+  \begin{itemize}
+    \item A curve that does loop around a hole cannot be shrunk down to a point in \(A\) without leaving \(A\). This curve is not homotopic to a point. 
+  \end{itemize}
+\end{definition}
+
+
+\begin{theorem}[Cauchy's Theorem for a Simply Connected Region]
+  If \(f\) is analytic on a simply connected region \(G\) and \(\gamma\) is a closed curved in \(G\), then 
+  \[
+    \int_\gamma f = 0.
+    \]
+\end{theorem}
+
+\begin{theorem}[Path Independence on Simply Connected Regions]
+  Suppose that \(f\) is analytic on a simply connected region \(A\). 
+  Then for any two curves \(\gamma_1\) and \(\gamma_2\) joining two points \(z_0\) and \(z_1\) in A, we have
+  \[ \int_{\gamma_1} = \int_{\gamma_2} f\]
+\end{theorem}
+
+\begin{theorem}[Antiderviative Theorem]
+  Let \(f\) be a function defined on a simply connected region \(A\). 
+  Then there is an analytic function \(F\) defined on \(A\) that is unique up to an additive constant, such that \(F'(Z)  = f(z)\) for all \(z\) in \(A\). 
+  We call \(F\) the antiderivative of \(f\) on \(A\). 
+\end{theorem}
+
+
+\begin{theorem}[Existence of Logarithms]
+  Let \(A\) be a simply connected region and assume that \(0 \not \in A\).
+  Then there is an analytic function \(F(z)\), unique up to the addition of multiples of \(2 \pi i\), such that \(e^{F(z)} = z\).
+\end{theorem}
+
+\begin{definition}[Branch of the Logarithm function on \(A\)]
+  Our choice of a \(F\) such that \(e^{F(z)} = z\).
+\end{definition}
+
+
+\subsection{A Closer Look at Cauchy's Theorem}
+
+\begin{theorem}[Cauchy's Theorem for a Rectangle]
+  Suppose that \(R\) is a rectangular path with sides parallel to the axes and that \(f\)  is a function defined and analytic on an open an open set \(G\) containing \(R\) and its interior.
+  Then 
+  \[\int_R f = 0.\]
+
+\end{theorem}
+
+\begin{theorem}[Cauchy's Theorem for a Disk]
+  Suppose that \(f : D \to \C\) is analytic on a disk \(D = D(z_0; \rho) \subset \C\).
+  Then
+  \begin{enumerate}
+    \item \(f\) has an antiderivative on \(D\); that is there is a function \(F : D \to C\) that is analytic on \(D\) and that satisfies \(F'(z) = f(z)\) for all \(z\) in \(D\).
+    \item If \(\Gamma\) is any closed curve in \(D\), then \(\int_\Gamma f = 0\).
+  \end{enumerate}
+
+\end{theorem}
+
+\begin{theorem}[Cauchy's Theorem for Deleted Neighborhoods]
+  Suppose that \(R\) is a rectangular path with sides parallel to the axes, that \(f\)is a function defined on an open set  \(G\) containing \(R\) and its interior, and that \(f\) is analytic on \(G\) except at some fixed point \(z_1\) in \(G\) which is not on the path \(R\). 
+  Suppose that at \(z_1\), the function \(f\) satisfies \(\lim_{z \to z_1} (z - z_1) f(z) = 0 \). 
+  Then \(\int_R f = 0\).
+
+  \paragraph{Note}
+  The limit condition holds under any of the following conditions.
+  \begin{itemize}
+    \item If \(f\) is bounded in a deleted neighborhood of \(z_1\)
+    \item If \(f\) is continuous on  \(G\)
+    \item If \(\lim_{z \to z_1} f(z)\) exists. 
+  \end{itemize}
+\end{theorem}
+
+\begin{theorem}
+  Suppose that \(R\) is a rectangular path with sides parallel to the axes, that \(f\) is a function defined and continuous on an open set \(G\) containing \(R\) and its interior, and that \(f\) is analytic on \(G\) except at some fixed point \(z_1\) in \(G\). 
+  Then \(\int_R f = 0\).
+\end{theorem}
+
+
+
+
+
+
+\begin{theorem}[Strengthened Cauchy's Theorem for a Disk]
+  Suppose that \(f : D \to \C\) is continuous on \(D\) and analytic on \(D \setminus \{z_1\}\) for some fixed \(z_1\) in \(D\). 
+  Then
+  \begin{enumerate}
+    \item \(f\) has an antiderivative on \(D\); that is there is a function \(F : D \to C\) that is analytic on \(D\) and that satisfies \(F'(z) = f(z)\) for all \(z\) in \(D\).
+    \item If \(\Gamma\) is any closed curve in \(D\), then \(\int_\Gamma f = 0\).
+  \end{enumerate}
+\end{theorem}
+
+
+\begin{definition}[homotopic with fixed endpoints to \(\gamma_1\)]
+  Suppose \(\gamma_0 : [0, 1] \to G \) and \(\gamma_1 : [0, 1] \to G \) are two continuous curves from \(z_0\) to \(z_1\) in a set \(G\). 
+  We say that \(\gamma_0\) is homotopic with fixed endpoints to \(\gamma_1\) in \(G\) if there is a continuous function \(H : [0, 1] \times [0, 1] \to G\) from the unit square \([0, 1] \times [0, 1]\) into \(G\) such that 
+  \begin{enumerate}
+    \item \(H(0, t) = \gamma_0(t)\)  for \(0 \leq t \leq 1\). 
+    \item \(H(1, t) = \gamma_1(t)\)  for \(0 \leq t \leq 1\). 
+    \item \(H(s, 0) = z_0\) for \(0 \leq s \leq 1\). 
+    \item \(H(s, 1) = z_1\)  for \(0 \leq s \leq 1\). 
+  \end{enumerate}
+
+  \paragraph{Note}
+  If we fix \(\gamma_s(t) = H(s, t)\), then each \(\gamma_s\) is a continuous curve in \(G\). 
+
+  \paragraph{Construction}
+  One possible homotopy from one curve to the other is \(H(s, t) = t + t^{1 + s} i\).
+   Another is \(H(s, t) = s(t + t^2 i) + (1 - s)(t + ti)\), which is the straight line between \(t + ti\) and \(t + t^2 i\)
+\end{definition}
+
+\begin{definition}[homotopic as closed curves in \(G\)]
+  Suppose \(\gamma_0 : [0, 1] \to G \) and \(\gamma_1 : [0, 1] \to G \) are two continuous curves closed curves in a set \(G\). 
+  We say that \(\gamma_0\) and \(\gamma_1\) are homotopic as closed curves in \(G\) if there is a continuous function \(h : [0, 1] \times [0, 1] \to G\) from the unit square \([0, 1] \times [0, 1]\) into \(G\) such that
+  \begin{enumerate}
+    \item \(H(0, t) = \gamma_0(t)\) for \(0 \leq t \leq 1\).
+    \item \(H(1, t) = \gamma_1(t)\) for \(0 \leq t \leq 1\).
+    \item \(H(s, 0) = H(s, 1)\) for \(0 \leq s \leq 1\).
+  \end{enumerate}
+  \paragraph{Note}
+  If we fix \(\gamma_s(t) = H(s, t)\), then each \(\gamma_s\) is a continuous curve in \(G\). 
+
+  \paragraph{Examples}
+  The unit circle and ellipse are homotopic closed curves in an annulus. With one such \(H\) as \(H(s, t) = (1 + s) \cos t + i \sin t\). 
+  If we would have used a disk instead of an annulus then both curves would have been homotopic to a point. Really an curve is homotopic to a point in a disk. 
+
+  \paragraph{Usage}
+  With more complicated regions, we often rely on our geometric intuition to determine when two curves are homotopic. 
+  That is we try to decide whether we can continuously deform one curve to the other without leaving our region. 
+  One reason is that we rarely use the homotopies \(H\) explicitly in practice; they are usually theoretical tools whose existence allows us to claim something else, such as equality of two integrals.
+  In many situations homotopies might be quite complicated to write down.
+  However, we must be prepared to justify our geometric intuition either with an explicit \(H\) or a proof of its existence in any particular situation. 
+
+
+\end{definition}
+
+\begin{definition}[Simply Connected]
+  A connected set \(G\) is called simply connected if every closed curve \(\gamma\) in \(G\) is homotopic (as a closed curve) to a point in \(G\), that is, to some constant curve. 
+\end{definition}
+
+
+\begin{definition}[Convex Set]
+  A set \(A\) is called convex if it contains the straight-line segment between every pair of its points. 
+  That is, if \(z_0\) and \(z_1\) are in \(A\), then so is \(s z_1 + (s - 1) z_0\) for every number \(s\) between \(0\) and \(0\).
+\end{definition}
+
+\begin{theorem}
+  If \(A\) is a convex region, then any two closed curves in \(A\) are homotopic as closed curves in \(A\), and any two curves with the same endpoints are homotopic with fixed endpoints. 
+\end{theorem}
+
+\begin{theorem}[A convex region is simply connected].
+\end{theorem}
+
+\begin{theorem}[Deformation Theorem]
+  Suppose that \(f\) is an analytic function on an open set \(G\) and that \(\gamma_0\) and \(\gamma_1\) are piecewise \(C^1\) curves in \(G\). 
+  \begin{enumerate}
+    \item If \(\gamma_0 \) and \(\gamma_1\) are paths from \(z_0\) to \(z_1\) and are homotopic in \(G\) with fixed endpoints, then 
+      \[\int_{\gamma_0} f = \int_{\gamma_1} f.\]
+    \item If \(\gamma_0\) and \(\gamma_1\) are closed curves with are homotopic as closed curves in \(G\), then 
+      \[\int_{\gamma_0} f = \int_{\gamma_1} f.\]
+  \end{enumerate}
+
+  \paragraph{Note}
+  Technically the proof given in the book requires the homotopies to be smooth, but there is a proof without this restriction. 
+\end{theorem}
+
+\begin{definition}[Smooth homotopy]
+  A homotopy \(H : [0, 1] \times [0, 1] \to G\) is called smooth if the intermediate curves \(\gamma_s(t)\) are piecewise \(C^1\) functions of \(t\) for each \(s\) and the cross curves \(\lambda_t(s)\) are piecewise \(C^1\) functions of \(s\) for each \(t\). 
+\end{definition}
+
+\begin{theorem}[Homotopy Form of Cauchy's Theorem]
+  Let \(f\) be analytic on a region \(G\). 
+  Let \(\gamma\) be a closed curve in \(G\) which is homotopic to a point in \(G\). Then
+  \[\int_\gamma f = 0.\]
+  
+\end{theorem}
+
+
+
+
+
+
+\end{document}
+
+
+
